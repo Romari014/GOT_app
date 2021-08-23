@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './itemDetails.css';
 
-const Field = ({item, field, label}) => {
-    return(
+const Field = ({ item, field, label }) => {
+    return (
         <li className="list-group-item d-flex justify-content-between">
             <span className="term">{label}</span>
             <span>{item[field]}</span>
@@ -12,9 +12,9 @@ const Field = ({item, field, label}) => {
 
 export {
     Field
-}
+};
 
-export default class CharDetails extends Component {
+export default class ItemDetails extends Component {
 
 
     state = {
@@ -26,30 +26,30 @@ export default class CharDetails extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.charId !== prevProps.charId) {
+        if (this.props.itemId !== prevProps.itemId) {
             this.updateItem();
         }
     }
 
     updateItem() {
-        const {itemId, getData} = this.props;
+        const { itemId, getData } = this.props;
         if (!itemId) {
             return;
         }
 
         getData(itemId)
             .then((item) => {
-                this.setState({item})
-            });
+                this.setState({ item })
+            })
     }
 
     render() {
 
         if (!this.state.item) {
-            return <span className="select-error">Please select item in the list</span>
+            return <span className='select-error'>Please select item in the list</span>
         }
-        const {item} = this.state;
-        const {name} = item;
+        const { item } = this.state;
+        const { name } = item;
 
         return (
             <div className="char-details rounded">
@@ -57,7 +57,7 @@ export default class CharDetails extends Component {
                 <ul className="list-group list-group-flush">
                     {
                         React.Children.map(this.props.children, (child) => {
-                            return React.cloneElement(child, {item})
+                            return React.cloneElement(child, { item })
                         })
                     }
                 </ul>

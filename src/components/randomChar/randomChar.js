@@ -14,9 +14,13 @@ export default class RandomChar extends Component {
         error: false
     }
 
+    static defaultProps = {
+        interval: 15000
+    }
+
     componentDidMount() { //hooks
         this.updateCharacter();
-        this.timerId = setInterval(this.updateCharacter, 15000);
+        this.timerId = setInterval(this.updateCharacter, this.props.interval);
     }
 
     componentWillUnmount() { //hooks

@@ -10,11 +10,13 @@ export default class RandomChar extends Component {
     gotService = new gotService();
     state = {
         char: {},
-        loading: true
+        loading: true,
+        error: false
     }
+
     componentDidMount() { //hooks
         this.updateCharacter();
-        this.timerId = setInterval(this.updateCharacter, 1500);
+        this.timerId = setInterval(this.updateCharacter, 15000);
     }
 
     componentWillUnmount() { //hooks
@@ -24,8 +26,7 @@ export default class RandomChar extends Component {
     onCharLoaded = (char) => {
         this.setState({
             char,
-            loading: false,
-            error: false
+            loading: false
         })
     }
 
@@ -44,7 +45,6 @@ export default class RandomChar extends Component {
     }
 
     render() {
-        console.log('render');
         const { char, loading, error } = this.state;
 
         const errorMessage = error ? <ErrorMessage /> : null;
@@ -55,8 +55,8 @@ export default class RandomChar extends Component {
         return (
                 <div className="random-block rounded">
                     {errorMessage}
-                    {content}
                     {spinner}
+                    {content}
                 </div>
         );
     }
